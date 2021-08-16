@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.tmall.mapper.OrderInfoMapper">
+
+    <resultMap id="BaseResultMap" type="com.tmall.entity.OrderInfo">
+        <id property="id" column="id" jdbcType="INTEGER"/>
+        <result property="orderCode" column="orderCode" jdbcType="VARCHAR"/>
+        <result property="address" column="address" jdbcType="VARCHAR"/>
+        <result property="post" column="post" jdbcType="VARCHAR"/>
+        <result property="receiver" column="receiver" jdbcType="VARCHAR"/>
+        <result property="mobile" column="mobile" jdbcType="VARCHAR"/>
+        <result property="userMessage" column="userMessage" jdbcType="VARCHAR"/>
+        <result property="createDate" column="createDate" jdbcType="TIMESTAMP"/>
+        <result property="payDate" column="payDate" jdbcType="TIMESTAMP"/>
+        <result property="deliveryDate" column="deliveryDate" jdbcType="TIMESTAMP"/>
+        <result property="confirmDate" column="confirmDate" jdbcType="TIMESTAMP"/>
+        <result property="userId" column="user_id" jdbcType="INTEGER"/>
+        <result property="status" column="status" jdbcType="VARCHAR"/>
+        <result property="totalPrice" column="total_price" jdbcType="DECIMAL"/>
+        <result property="totalNumber" column="total_number" jdbcType="INTEGER"/>
+    </resultMap>
+
+    <sql id="Base_Column_List">
+        id
+        ,orderCode,address,
+        post,receiver,mobile,
+        userMessage,createDate,payDate,
+        deliveryDate,confirmDate,user_id,
+        status, total_price, total_number
+    </sql>
+    <select id="selectAll" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from order_info
+    </select>
+    <select id="selectAllByUserIdAndStatusNotOrderById" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from order_info
+        where
+        user_id = #{userId,jdbcType=NUMERIC}
+        AND status not in (#{status,jdbcType=VARCHAR})
+        order by id
+    </select>
+</mapper>

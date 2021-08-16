@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<!--引入标准标签库，js,css，自定义javascript函数等-->
+<head th:include="include/front/header::html"></head>
+<body>
+<div id="workingArea">
+    <!--置顶导航-->
+    <div th:replace="include/front/top::html"></div>
+    <!--搜索栏-->
+    <div th:replace="include/front/search::html"></div>
+    <!--首页业务页面-->
+    <div th:replace="include/front/home/homePage::html"></div>
+    <!--页脚-->
+    <div th:replace="include/front/footer::html"></div>
+</div>
+</body>
+</html>
