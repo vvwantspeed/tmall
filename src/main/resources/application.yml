@@ -1,17 +1,31 @@
 server:
   port: 9090
   servlet:
-    context-path: /tmall
+    context-path: /tmalllet
+
+# 远程服务器ip
+remote: 192.168.202.131
 
 spring:
   # 数据库配置
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
-    #    url: jdbc:mysql://3.1.221.40:3306/tmall?useUnicode=true&characterEncoding=utf-8&useSSL=false&allowPublicKeyRetrieval=true&serverTimeZone=GMT%2B80
-    url: jdbc:mysql://127.0.0.1:3306/tmall?useUnicode=true&characterEncoding=utf-8&useSSL=false&allowPublicKeyRetrieval=true&serverTimeZone=GMT%2B80
+    #    url: jdbc:mysql://3.1.221.40:3306/tmalllet?useUnicode=true&characterEncoding=utf-8&useSSL=false&allowPublicKeyRetrieval=true&serverTimeZone=GMT%2B80
+    url: jdbc:mysql://127.0.0.1:3306/tmalllet?useUnicode=true&characterEncoding=utf-8&useSSL=false&allowPublicKeyRetrieval=true&serverTimeZone=GMT%2B80
     username: root
     password: 123456
+    type: com.alibaba.druid.pool.DruidDataSource
 
+  # redis
+  redis:
+    host: ${remote}
+    password: foobared
+
+  #
+  ## ThreadPool
+  #spring.task.execution.pool.core-size=5
+  #spring.task.execution.pool.max-size=15
+  #spring.task.execution.pool.queue-capacity=100
   # 模板引擎配置
   thymeleaf:
     # 经典html5模式，即允许非严格的html出现，元素少点什么也可以编译通过
@@ -27,6 +41,13 @@ spring:
     multipart:
       max-file-size: 100MB
       max-request-size: 100MB
+
+# rocketmq
+rocketmq:
+  name-server: ${remote}:9876
+  #rocketmq.producer.group=seckill_producer
+  producer:
+    group: tmalllet_producer
 
 #pagehelper:
 #  helper-dialect: mysql

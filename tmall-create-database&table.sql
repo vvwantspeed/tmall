@@ -88,10 +88,53 @@ CREATE TABLE `product`  (
   `originalPrice` float NULL DEFAULT NULL,
   `promotePrice` float NULL DEFAULT NULL,
   `stock` int NULL DEFAULT NULL,
+  `sales` int NOT NULL DEFAULT '0',
   `category_id` int NULL DEFAULT NULL,
   `createDate` datetime NULL DEFAULT NULL,
   PRIMARY KEY (`id`) USING BTREE
 ) ENGINE = InnoDB CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
+
+-- ----------------------------
+-- Table structure for promotion
+-- 秒杀活动表
+-- ----------------------------
+DROP TABLE IF EXISTS `promotion`;
+CREATE TABLE `promotion` (
+  `id` int NOT NULL AUTO_INCREMENT,
+  `name` varchar(100) NOT NULL DEFAULT '',
+  `start_time` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `end_time` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `product_id` int NOT NULL DEFAULT '0',
+  `promotion_price` double NOT NULL DEFAULT '0',
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `item_id_UNIQUE` (`product_id`)
+) ENGINE = InnoDB CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
+
+-- ----------------------------
+-- Table structure for serial_number
+-- 事务性消息 异步下单时，校验用的流水号生成规则
+-- ----------------------------
+DROP TABLE IF EXISTS `serial_number`;
+CREATE TABLE `serial_number` (
+  `name` varchar(50) NOT NULL,
+  `value` int NOT NULL DEFAULT '0',
+  `step` int NOT NULL DEFAULT '1',
+  PRIMARY KEY (`name`),
+  UNIQUE KEY `name_UNIQUE` (`name`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- ----------------------------
+-- Table structure for product_stock_log
+-- 库存流水
+-- ----------------------------
+DROP TABLE IF EXISTS `product_stock_log`;
+CREATE TABLE `product_stock_log` (
+  `id` varchar(50) NOT NULL,
+  `product_id` int NOT NULL DEFAULT '0',
+  `amount` int NOT NULL DEFAULT '0',
+  `status` int NOT NULL DEFAULT '0' COMMENT '0-default; 1-success; 2-failure;',
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Table structure for product_image

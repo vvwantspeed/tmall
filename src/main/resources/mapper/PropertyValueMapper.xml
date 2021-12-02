@@ -2,9 +2,9 @@
 <!DOCTYPE mapper
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.tmall.mapper.PropertyValueMapper">
+<mapper namespace="com.tmalllet.mapper.PropertyValueMapper">
 
-    <resultMap id="BaseResultMap" type="com.tmall.entity.PropertyValue">
+    <resultMap id="BaseResultMap" type="com.tmalllet.entity.PropertyValue">
             <id property="id" column="id" jdbcType="INTEGER"/>
             <result property="productId" column="product_id" jdbcType="INTEGER"/>
             <result property="propertyId" column="property_id" jdbcType="INTEGER"/>

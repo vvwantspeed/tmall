@@ -5,7 +5,7 @@
  Source Server Type    : MySQL
  Source Server Version : 80023
  Source Host           : localhost:3306
- Source Schema         : tmall
+ Source Schema         : tmalllet
 
  Target Server Type    : MySQL
  Target Server Version : 80023

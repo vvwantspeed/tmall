@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.tmalllet.mapper.SerialNumberMapper">
+
+    <resultMap id="BaseResultMap" type="com.tmalllet.entity.SerialNumber">
+            <id property="name" column="name" jdbcType="VARCHAR"/>
+            <result property="value" column="value" jdbcType="INTEGER"/>
+            <result property="step" column="step" jdbcType="INTEGER"/>
+    </resultMap>
+
+    <sql id="Base_Column_List">
+        name,value,step
+    </sql>
+    <select id="selectOneByName" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from serial_number
+        where
+        name = #{name,jdbcType=VARCHAR}
+    </select>
+</mapper>
